@@ -17,30 +17,32 @@ makeCacheMatrix <- function(x = matrix()) {
         setimat <- function(imat) im <<- imat
         getimat <- function() im
 
-
-        #make sure an argument is passed into the makeCacheMatrix function
-        if (class(x) == "matrix") {
-                #only square matrices can be inverted
-                if (nrow(x) == ncol(x)) {
-                        if (!identical(x,m)) {
-                                printvect <- cat("the matrix curently in the cache is ", getmat())
-                                print (printmat)
-                                setmat(x) #assign x to m
-                                printmat <- cat("the new matrix just stored into cache is ", getmat())
-                                print (printmat)
+        #the function makeCacheMatrix must take an argument
+        if (!missing(x)) {
+                #make sure an argument is passed into the makeCacheMatrix function
+                if (class(x) == "matrix") {
+                        #only square matrices can be inverted
+                        if (nrow(x) == ncol(x)) {
+                                if (!identical(x,m)) {
+                                        printmat <- cat("the matrix curently in the cache is ", getmat())
+                                        print (printmat)
+                                        setmat(x) #assign x to m
+                                        printmat <- cat("the new matrix just stored into cache is ", getmat())
+                                        print (printmat)
+                                } else {
+                                        printmat <- "the new matrix is identical to stored matrix"
+                                        print(printmat)
+                                }
+                                list(setmat = setmat, getmat = getmat, setimat = setimat, getimat = getimat)
                         } else {
-                                printmat <- "the new matrix is identical to stored matrix"
-                                print (printmat)
+                                print ("the matrix in the argument is not square")     
                         }
                 } else {
-                        print ("the matrix in the argument is not square")     
+                        print ("the argument is not of class matrix")
                 }
-
         } else {
-                print ("the argument is not of class matrix")
-        }
-
-        list(setmat = setmat, getmat = getmat, setimat = setimat, getimat = getimat)
+                print ("no agrument was passed into the makeCacheMatrix function")
+        }          
 }
 
 
