@@ -7,17 +7,17 @@ makeCacheMatrix <- function(x = matrix()) {
         
         # if im does not exist yet, create im and initialize to NULL
         if (!exists("im")) {
-                im <<- NULL
+                im <<- NULL #inverse matrix
         }
         
         # if refm does not exist yet, create refm and initialize to NULL
         if (!exists("refm")) {
-                refm <<- NULL
+                refm <<- NULL #reference source matrix
         }
         
         # if m does not exist yet, create m and initialize to NULL
         if (!exists("m")) {
-              m <<- NULL
+              m <<- NULL #source matrix
         }
         
         #setter and getter functions
@@ -68,31 +68,22 @@ cacheSolve <- function(x, ...) {
                 if(!is.null(i)) {
                         if (identical(x$getrefmat(),x$getmat())) {
                                 #retrieve the inverse matrix from the cache if the source matrix is unchanged
-                                message("retrieving the cached inverse matrix when the source matrix is unchanged")
-                                #i <- x$getimat()                        
+                                message("retrieving the cached inverse matrix when the source matrix is unchanged")               
                         } else {
-                                #compute the inverse matrix when the source matrix has changed
-                                message("computing the inverse matrix when the source matrix has changed")
+                                #compute the inverse matrix after the source matrix has changed
+                                message("computing the inverse matrix after the source matrix has changed")
                                 x$setimat(solve(x$getmat()))
                                 x$setrefmat(x$getmat())
-                                #i <- x$getimat()
                         }
                 } else {
                         #compute the inverse matrix for the first time 
                         message("computing the inverse matrix for the first time")
                         x$setimat(solve(x$getmat()))
                         x$setrefmat(x$getmat())
-                        #i <- x$getimat()
                 }
                 
                 i <- x$getimat()
                 message("the inverse matrix is ")
-                #printinvmat <- cat("the inverse matrix is ", i)
-                #print(printinvmat)
                 return (i)
         }                
 }
-                
-                
-                
- 
