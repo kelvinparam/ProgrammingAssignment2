@@ -66,22 +66,23 @@ cacheSolve <- function(x, ...) {
                 if (identical(x$getrefmat(),x$getmat())) {
                         #retrieve the inverse matrix from the cache if the source matrix is unchanged
                         message("retrieving the cached inverse matrix when the source matrix is unchanged")
-                        i <- x$getimat()                        
+                        #i <- x$getimat()                        
                 } else {
                         #compute the inverse matrix when the source matrix has changed
                         message("computing the inverse matrix when the source matrix has changed")
                         x$setimat(solve(x$getmat()))
                         x$setrefmat(x$getmat())
-                        i <- x$getimat()
+                        #i <- x$getimat()
                 }
         } else {
                 #compute the inverse matrix for the first time 
                 message("computing the inverse matrix for the first time")
                 x$setimat(solve(x$getmat()))
                 x$setrefmat(x$getmat())
-                i <- x$getimat()
+                #i <- x$getimat()
         }
         
+        i <- x$getimat()
         message("the inverse matrix is ")
         #printinvmat <- cat("the inverse matrix is ", i)
         #print(printinvmat)
